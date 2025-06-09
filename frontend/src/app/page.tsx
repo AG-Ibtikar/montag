@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   ClipboardList, 
   Layers, 
@@ -14,8 +14,22 @@ import {
   Shield
 } from 'lucide-react';
 import UserProfileMenu from '@/components/UserProfileMenu';
+import SignInModal from '@/components/auth/SignInModal';
+import { useRouter } from 'next/navigation';
 
 export default function Home(): React.JSX.Element {
+  const router = useRouter();
+  const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
+
+  const handleGetStarted = () => {
+    setIsSignInModalOpen(true);
+  };
+
+  const handleSignUpClick = () => {
+    setIsSignInModalOpen(false);
+    router.push('/onboarding');
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900">
       {/* Navigation */}
@@ -42,84 +56,83 @@ export default function Home(): React.JSX.Element {
       </nav>
 
       {/* Hero Section */}
-      <div className="relative overflow-hidden">
-        {/* Background Gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-pink-500/10" />
-        
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0">
-          <div className="absolute top-0 -left-4 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob" />
-          <div className="absolute top-0 -right-4 w-72 h-72 bg-yellow-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000" />
-          <div className="absolute -bottom-8 left-20 w-72 h-72 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000" />
+      <div className="relative isolate pt-14">
+        <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
+          <div className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-20 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]" />
         </div>
 
-        <div className="relative">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 text-center">
-            <div className="animate-fade-in">
-              <h1 className="text-4xl sm:text-6xl font-bold text-white mb-6 group">
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 transition-all duration-300 group-hover:from-purple-500 group-hover:to-blue-400">
-                  montaj.ai
-                </span>
-              </h1>
-              <p className="text-xl sm:text-2xl text-gray-300 mb-2 max-w-3xl mx-auto animate-fade-in-up">
-                Transform your Idea to Comprehensive Userstories
-              </p>
-              <p className="text-2xl sm:text-4xl font-bold mb-8 max-w-3xl mx-auto animate-fade-in-up delay-100">
-                <span className="text-[#c8f31d] animate-typing overflow-hidden whitespace-nowrap border-r-2 border-r-[#c8f31d] inline-block">
-                  The 1st AI Product Manager
-                </span>
-              </p>
-            </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 text-center">
+          <div className="animate-fade-in">
+            <h1 className="text-4xl sm:text-6xl font-bold text-white mb-6 group">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 transition-all duration-300 group-hover:from-purple-500 group-hover:to-blue-400">
+                montaj.ai
+              </span>
+            </h1>
+            <p className="text-xl sm:text-2xl text-gray-300 mb-2 max-w-3xl mx-auto animate-fade-in-up">
+              Transform your Idea to Comprehensive Userstories
+            </p>
+            <p className="text-2xl sm:text-4xl font-bold mb-8 max-w-3xl mx-auto animate-fade-in-up delay-100">
+              <span className="text-[#c8f31d] animate-typing overflow-hidden whitespace-nowrap border-r-2 border-r-[#c8f31d] inline-block">
+                The 1st AI Product Manager
+              </span>
+            </p>
+          </div>
 
-            <div className="animate-fade-in-up delay-200">
-              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-                <Link
-                  href="/generate"
-                  className="group inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 focus:ring-offset-gray-800 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-blue-500/20"
-                >
-                  Get Started
-                  <ArrowRight className="ml-2 h-5 w-5 transform transition-transform duration-300 group-hover:translate-x-1" />
-                </Link>
-                <Link
-                  href="#how-it-works"
-                  className="group inline-flex items-center justify-center px-8 py-3 border border-gray-700 text-base font-medium rounded-lg text-gray-300 bg-gray-800 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 focus:ring-offset-gray-800 transition-all duration-300 hover:shadow-lg hover:shadow-gray-500/20"
-                >
-                  Learn More
-                  <span className="ml-2 transform transition-transform duration-300 group-hover:translate-y-0.5">↓</span>
-                </Link>
+          <div className="animate-fade-in-up delay-200">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+              <button
+                onClick={handleGetStarted}
+                className="group inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 focus:ring-offset-gray-800 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-blue-500/20"
+              >
+                Get Started
+                <ArrowRight className="ml-2 h-5 w-5 transform transition-transform duration-300 group-hover:translate-x-1" />
+              </button>
+              <Link
+                href="#how-it-works"
+                className="group inline-flex items-center justify-center px-8 py-3 border border-gray-700 text-base font-medium rounded-lg text-gray-300 bg-gray-800 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 focus:ring-offset-gray-800 transition-all duration-300 hover:shadow-lg hover:shadow-gray-500/20"
+              >
+                Learn More
+                <span className="ml-2 transform transition-transform duration-300 group-hover:translate-y-0.5">↓</span>
+              </Link>
+            </div>
+          </div>
+
+          <div className="animate-fade-in-up delay-400">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+              <div className="group bg-gray-800/50 backdrop-blur-lg border border-gray-700 rounded-xl p-6 hover:border-blue-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/20 hover:-translate-y-1">
+                <div className="w-12 h-12 bg-blue-500/10 rounded-lg flex items-center justify-center mb-4 transform transition-transform duration-300 group-hover:scale-110 group-hover:bg-blue-500/20">
+                  <Sparkles className="h-6 w-6 text-blue-400 transform transition-transform duration-300 group-hover:rotate-12" />
+                </div>
+                <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-blue-400 transition-colors duration-300">Smart Generation</h3>
+                <p className="text-gray-400 group-hover:text-gray-300 transition-colors duration-300">AI-powered story generation with comprehensive acceptance criteria</p>
               </div>
-            </div>
 
-            <div className="animate-fade-in-up delay-400">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-                <div className="group bg-gray-800/50 backdrop-blur-lg border border-gray-700 rounded-xl p-6 hover:border-blue-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/20 hover:-translate-y-1">
-                  <div className="w-12 h-12 bg-blue-500/10 rounded-lg flex items-center justify-center mb-4 transform transition-transform duration-300 group-hover:scale-110 group-hover:bg-blue-500/20">
-                    <Sparkles className="h-6 w-6 text-blue-400 transform transition-transform duration-300 group-hover:rotate-12" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-blue-400 transition-colors duration-300">Smart Generation</h3>
-                  <p className="text-gray-400 group-hover:text-gray-300 transition-colors duration-300">AI-powered story generation with comprehensive acceptance criteria</p>
+              <div className="group bg-gray-800/50 backdrop-blur-lg border border-gray-700 rounded-xl p-6 hover:border-purple-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 hover:-translate-y-1">
+                <div className="w-12 h-12 bg-purple-500/10 rounded-lg flex items-center justify-center mb-4 transform transition-transform duration-300 group-hover:scale-110 group-hover:bg-purple-500/20">
+                  <Zap className="h-6 w-6 text-purple-400 transform transition-transform duration-300 group-hover:rotate-12" />
                 </div>
+                <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-purple-400 transition-colors duration-300">Multiple Formats</h3>
+                <p className="text-gray-400 group-hover:text-gray-300 transition-colors duration-300">Support for various story formats and export options</p>
+              </div>
 
-                <div className="group bg-gray-800/50 backdrop-blur-lg border border-gray-700 rounded-xl p-6 hover:border-purple-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 hover:-translate-y-1">
-                  <div className="w-12 h-12 bg-purple-500/10 rounded-lg flex items-center justify-center mb-4 transform transition-transform duration-300 group-hover:scale-110 group-hover:bg-purple-500/20">
-                    <Zap className="h-6 w-6 text-purple-400 transform transition-transform duration-300 group-hover:rotate-12" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-purple-400 transition-colors duration-300">Multiple Formats</h3>
-                  <p className="text-gray-400 group-hover:text-gray-300 transition-colors duration-300">Support for various story formats and export options</p>
+              <div className="group bg-gray-800/50 backdrop-blur-lg border border-gray-700 rounded-xl p-6 hover:border-pink-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-pink-500/20 hover:-translate-y-1">
+                <div className="w-12 h-12 bg-pink-500/10 rounded-lg flex items-center justify-center mb-4 transform transition-transform duration-300 group-hover:scale-110 group-hover:bg-pink-500/20">
+                  <Shield className="h-6 w-6 text-pink-400 transform transition-transform duration-300 group-hover:rotate-12" />
                 </div>
-
-                <div className="group bg-gray-800/50 backdrop-blur-lg border border-gray-700 rounded-xl p-6 hover:border-pink-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-pink-500/20 hover:-translate-y-1">
-                  <div className="w-12 h-12 bg-pink-500/10 rounded-lg flex items-center justify-center mb-4 transform transition-transform duration-300 group-hover:scale-110 group-hover:bg-pink-500/20">
-                    <Shield className="h-6 w-6 text-pink-400 transform transition-transform duration-300 group-hover:rotate-12" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-pink-400 transition-colors duration-300">Test Cases</h3>
-                  <p className="text-gray-400 group-hover:text-gray-300 transition-colors duration-300">Automatically generate test cases for your user stories</p>
-                </div>
+                <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-pink-400 transition-colors duration-300">Test Cases</h3>
+                <p className="text-gray-400 group-hover:text-gray-300 transition-colors duration-300">Automatically generate test cases for your user stories</p>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Sign In Modal */}
+      <SignInModal
+        isOpen={isSignInModalOpen}
+        onClose={() => setIsSignInModalOpen(false)}
+        onSignUpClick={handleSignUpClick}
+      />
 
       {/* Rest of the content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">

@@ -2,34 +2,27 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAuth } from '@/contexts/AuthContext';
-import { toast } from 'react-hot-toast';
+import { useAuth } from '@/components/AuthProvider';
 
 export default function ProtectedRoute({ children }: { children: React.ReactNode }) {
+  const { user, loading } = useAuth();
   const router = useRouter();
-  const { user, userData, loading } = useAuth();
 
   useEffect(() => {
-    if (!loading) {
-      if (!user) {
-        toast.error('Please sign in to access this page');
-        router.push('/');
-      } else if (!userData?.onboarded) {
-        toast.error('Please complete your profile first');
-        router.push('/onboarding');
-      }
+    if (!loading && !user) {
+      router.push('/');
     }
-  }, [user, userData, loading, router]);
+  }, [user, loading, router]);
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-900 flex items-center justify-center">
-        <div className="text-white">Loading...</div>
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
       </div>
     );
   }
 
-  if (!user || !userData?.onboarded) {
+  if (!user) {
     return null;
   }
 

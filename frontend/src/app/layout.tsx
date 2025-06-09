@@ -1,13 +1,15 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import ClientLayout from '@/components/ClientLayout';
+import { Toaster } from 'react-hot-toast';
+import { AuthProvider } from '@/components/AuthProvider';
+import { Suspense } from 'react';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'montaj.ai - AI-Powered User Story Generator',
-  description: 'Transform your ideas into comprehensive user stories with AI',
+  title: 'Montag - User Story Generator',
+  description: 'Generate user stories with AI',
 };
 
 export default function RootLayout({
@@ -18,9 +20,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ClientLayout>
-          {children}
-        </ClientLayout>
+        <Suspense fallback={<div>Loading...</div>}>
+          <AuthProvider>
+            {children}
+            <Toaster position="top-right" />
+          </AuthProvider>
+        </Suspense>
       </body>
     </html>
   );

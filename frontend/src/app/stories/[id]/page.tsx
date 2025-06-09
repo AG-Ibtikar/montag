@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useAuth } from '@/contexts/AuthContext';
+import { useAuth } from '@/components/AuthProvider';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import { ArrowLeft, Clock, BookOpen, Loader2, Copy, Check } from 'lucide-react';
 import Link from 'next/link';

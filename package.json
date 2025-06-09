@@ -1,6 +1,8 @@
 {
   "dependencies": {
+    "@types/pg": "^8.11.14",
     "firebase": "^11.6.1",
-    "lucide-react": "^0.503.0"
+    "lucide-react": "^0.503.0",
+    "pg": "^8.15.6"
   }
 }

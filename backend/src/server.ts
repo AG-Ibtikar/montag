@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { generateStoriesFromNotes } from './services/openaiService';
+import storyRoutes from './routes/storyRoutes';
 
 dotenv.config();
 
@@ -22,11 +23,14 @@ app.use(cors({
       callback(new Error('Not allowed by CORS'));
     }
   },
-  methods: ['GET', 'POST'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,
 }));
 
 app.use(express.json());
+
+// Story routes
+app.use('/api/stories', storyRoutes);
 
 interface GenerateStoriesRequest {
   notes: string;
