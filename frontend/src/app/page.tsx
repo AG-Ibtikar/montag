@@ -37,8 +37,11 @@ export default function Home(): React.JSX.Element {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex-shrink-0">
-              <Link href="/" className="text-white font-bold text-xl">
-                montaj.ai
+              <Link href="/" className="flex items-center">
+                <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-purple-600 rounded flex items-center justify-center mr-2">
+                  <span className="text-white font-bold text-lg">MJ</span>
+                </div>
+                <span className="text-white font-bold text-xl">Montaj</span>
               </Link>
             </div>
             <div className="flex items-center space-x-4">
@@ -65,7 +68,7 @@ export default function Home(): React.JSX.Element {
           <div className="animate-fade-in">
             <h1 className="text-4xl sm:text-6xl font-bold text-white mb-6 group">
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 transition-all duration-300 group-hover:from-purple-500 group-hover:to-blue-400">
-                montaj.ai
+                Montaj
               </span>
             </h1>
             <p className="text-xl sm:text-2xl text-gray-300 mb-2 max-w-3xl mx-auto animate-fade-in-up">

@@ -78,14 +78,10 @@ export default function AppLayout({ children }: AppLayoutProps) {
             {/* Logo and Navigation */}
             <div className="flex items-center">
               <Link href="/stories" className="flex items-center">
-                <Image
-                  src="/logo.png"
-                  alt="Montag Logo"
-                  width={32}
-                  height={32}
-                  className="h-8 w-auto"
-                />
-                <span className="ml-2 text-xl font-bold text-white">Montag</span>
+                <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-purple-600 rounded flex items-center justify-center">
+                  <span className="text-white font-bold text-lg">MJ</span>
+                </div>
+                <span className="ml-2 text-xl font-bold text-white">Montaj</span>
               </Link>
               <nav className="ml-10 flex items-center space-x-4">
                 <Link
